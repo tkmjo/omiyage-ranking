@@ -14,6 +14,7 @@ footer {
     height: 400px;
     background-color: #dddddd;
     background-size: cover;
+    background: url("/images/bg_image.jpg") center center no-repeat;
 }
 .cover .cover-inner {
     width: 100%;
@@ -31,4 +32,5 @@ footer {
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 0.15em;
+    color: #fff;
 }
