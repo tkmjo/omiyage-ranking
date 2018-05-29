@@ -8,6 +8,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
+        $prefs = config('pref');
         return view('welcome');
     }
 }

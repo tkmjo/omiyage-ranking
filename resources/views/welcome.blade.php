@@ -12,5 +12,5 @@
 @endsection
 
 @section('content')
-    テスト
+    @include('omiyages.omiyages')
 @endsection

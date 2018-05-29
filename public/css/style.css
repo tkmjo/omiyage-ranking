@@ -2,22 +2,64 @@
 
 /* body */
 body {
-    background: #ffffff;
+    background: #fffff9;
 }
 footer {
     margin-top: 40px;
 }
 
+/* navbar */
+.navbar {
+    /* margin-bottom: 0; */
+    background: #ffffff;
+}
+
+.navbar-header img {
+    margin-top: 10px;
+}
+
+.navbar-right select {
+　-moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none transparent;
+  vertical-align: middle;
+  font-size: inherit;
+  color: inherit;
+  box-sizing: content-box;
+}
+
 /* cover */
 .cover {
+    margin-bottom: 20px;
+    margin-top: 51px;
     width: 100%;
     height: 400px;
     background-color: #dddddd;
     background-size: cover;
     background: url("/images/bg_image.jpg") center center no-repeat;
+    position: relative;
 }
+.cover::before {
+    background-color: rgba(0,0,0,0.4);
+    position: absolute;
+    top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
+}
+/*
+.cover .smoke {
+    background-color: rgba(0,0,0,0.3);
+}
+*/
 .cover .cover-inner {
-    width: 100%;
+    height: 100%;
     margin: auto;
     display: table;
 }
@@ -27,10 +69,91 @@ footer {
     text-align: center;
     position: relative;
 }
+.cover .cover-inner .cover-contents .covers {
+    /* background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px; */
+}
+
 .cover .cover-inner .cover-contents h1 {
     margin: 0 0 20px 0;
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 0.15em;
     color: #fff;
+}
+
+/* 内容がナビバーに隠れてしまうので追加 */
+.content-top {
+    margin-top: 100px;
+}
+
+/* おみやげwelcomeページ */
+.panel img {
+    max-width: 100%;
+}
+.panel .center-box {
+    text-align: center;
+}
+/* 商品一覧ページ */
+.wrapper {
+    position: relative;
+}
+.label {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 20px;
+    text-align: left;
+    line-height: 1.4;
+    
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a:link {
+    color: white;
+}
+a:visited {
+    color: white;
+}
+a:hover {
+    color: #a2d7dd;
+    text-decoration: none;
+}
+
+/* おみやげ詳細・ページ */
+.top-title {
+    /*
+    margin-bottom: 20px;
+    background-color: #d6c6af;
+    */
+    border-bottom: double 5px #FFC778;
+    margin-bottom: 20px;
+    font-size: 25px;
+    padding: 5px 0;
+    color: #555555;
+}
+
+
+/* お土産詳細ページ */
+.table.item_detail {
+    margin-top: 30px;
+}
+.data_name{
+    background-color: #f1f1f1;
+}
+
+/* 商品情報入力フォーム */
+.form-group.num {
+    width: 120px;
+}
+.form-group .form-control.nobr {
+    display: inline;
 }

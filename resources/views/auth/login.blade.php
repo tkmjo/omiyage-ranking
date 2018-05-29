@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-xs-offset-3 col-xs-6">
-        <div class="panel pnael-default">
+        <div class="panel panel-default content-top">
             <div class="panel-heading">ログイン</div>
             <div class="panel-body">
                 {!! Form::open(['route' => 'login.post']) !!}
