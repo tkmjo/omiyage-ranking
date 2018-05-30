@@ -38,6 +38,7 @@
                 </tr>
                 </tbody>
             </table>
+            @include('user_favorite.favorite_button', ['omiyage' => $omiyage])
         </div>
     </div>
 @endsection

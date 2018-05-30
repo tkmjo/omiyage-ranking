@@ -35,8 +35,13 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 // お土産情報
 Route::resource('omiyages', 'OmiyagesController');
 
-/*
+
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('omiyages', 'OmiyagesController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]); 
+    // お気に入り
+    Route::group(['prefix' => 'users/{id}'], function() {
+        Route::post('favorite', 'UserFavoriteController@store')->name('user.favorite');
+        Route::delete('unfavorite', 'UserFavoriteController@destroy')->name('user.unfavorite');
+        Route::get('favoriting', 'UsersController@favoriting')->name('users.favoriting');
+        Route::get('favorited', 'OmiyagesController@favorited')->name('omiyages.favorited');
+    });
 });
-*/

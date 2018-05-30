@@ -25,9 +25,13 @@
                         <li>
                             <a href="{{ route('omiyages.create') }}">おみやげの追加</a>
                         </li>
+                        
+                        
                         <li>
-                            <a href="#">お気に入り</a>
+                            <a href="{{ route('users.favoriting', Auth::user()->id) }}">お気に入り</a>
                         </li>
+                        
+                        
                         <li>
                             <a href="{{ route('logout.get') }}">ログアウト</a>
                         </li>

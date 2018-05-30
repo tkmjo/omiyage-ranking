@@ -10,4 +10,20 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    // ユーザーが登録しているお気に入りの個数を表示
+    public function count_favorites($user) {
+        $count_favorites = $user->favoriting()->count();
+        return [
+            'count_favorites' => $count_favorites,
+        ];
+    }
+    
+    // お土産ごとのお気に入り登録されている個数を表示
+    public function count_users($omiyage) {
+        $count_users = $omiyage->favorited()->count();
+        return [
+            'count_users' => $count_users,  
+        ];
+    }
 }

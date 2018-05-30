@@ -31,4 +31,32 @@ class User extends Authenticatable
     {
         return $this->hasMany(Omiyage::class);
     }
+    
+    public function favoriting() {
+        return $this->belongsToMany(Omiyage::class, 'user_omiyage', 'user_id', 'omiyage_id')->withTimeStamps();
+    }
+    
+    public function favorite($omiyageId) {
+        $exist = $this->is_favoriting($omiyageId);
+        if ($exist) {
+            return false;
+        } else {
+            $this->favoriting()->attach($omiyageId);
+            return true;
+        }
+    }
+    
+    public function unfavorite($omiyageId) {
+        $exist = $this->is_favoriting($omiyageId);
+        if ($exist) {
+            $this->favoriting()->detach($omiyageId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function is_favoriting($omiyageId) {
+        return $this->favoriting()->where('omiyage_id', $omiyageId)->exists();
+    }
 }
