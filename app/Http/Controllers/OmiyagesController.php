@@ -48,6 +48,7 @@ class OmiyagesController extends Controller
             'url' => 'max:191',
         ]);
         
+        
         $request->user()->omiyages()->create([
             'omiyage_name' => $request->omiyage_name, 
             'shop_name' => $request->shop_name, 

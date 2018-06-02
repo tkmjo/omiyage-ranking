@@ -14,36 +14,35 @@
                 <ul class="nav navbar-nav navbar-right">
                      @if (Auth::check())
                         <li>
-                            <a href="#">
-                                <select>
+                                <select onchange="top.location.href=value">
+                                    <option value=""><i class="fas fa-chart-bar"></i>ランキング</option>
+                                    
                                     @foreach(config('pref') as $index => $name)
-                                        <option value="{{ $index }}">{{ $name }}</option>
+                                        <option value="{{ route('ranking.rank', $name) }}">{{ $name }}</option>
                                     @endforeach
                                 </select>
-                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('omiyages.create') }}">おみやげの追加</a>
-                        </li>
-                        
-                        
-                        <li>
-                            <a href="{{ route('users.favoriting', Auth::user()->id) }}">お気に入り</a>
+                            <a href="{{ route('omiyages.create') }}"><i class="fas fa-plus"></i>&nbsp;おみやげの追加</a>
                         </li>
                         
                         
                         <li>
-                            <a href="{{ route('logout.get') }}">ログアウト</a>
+                            <a href="{{ route('users.favoriting', Auth::user()->id) }}"><i class="far fa-star"></i>&nbsp;お気に入り</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="{{ route('logout.get') }}"><i class="fas fa-user"></i>&nbsp;ログアウト</a>
                         </li>
                     @else
                         <li>
-                            <a href="#">
-                                <select>
+                                <select onchange="top.location.href=value">
+                                    <option value=""><i class="fas fa-chart-bar"></i>ランキング</option>
                                     @foreach(config('pref') as $index => $name)
-                                        <option value="{{ $index }}">{{ $name }}</option>
+                                        <option value="{{ route('ranking.rank', $name) }}">{{ $name }}</option>
                                     @endforeach
                                 </select>
-                            </a>
                         </li>
                         <li><a href="{{ route('signup.get') }}">会員登録</a></li>
                         <li><a href="{{ route('login') }}">ログイン</a></li>

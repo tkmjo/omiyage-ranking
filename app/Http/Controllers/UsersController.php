@@ -11,11 +11,11 @@ class UsersController extends Controller
     public function favoriting($id)
     {
         $user = User::find($id);
-        $favoriting = $user->favoriting()->paginate(10);
+        $omiyages = $user->favoriting()->paginate(10);
         
         $data = [
             'user' => $user,
-            'favoriting' => $favoriting,
+            'omiyages' => $omiyages,
         ];
         
         $data += $this->count_favorites($user);

@@ -19,7 +19,7 @@ class Controller extends BaseController
         ];
     }
     
-    // お土産ごとのお気に入り登録されている個数を表示
+    // お土産ごとにお気に入り登録しているユーザー数を表示
     public function count_users($omiyage) {
         $count_users = $omiyage->favorited()->count();
         return [

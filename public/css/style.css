@@ -8,7 +8,7 @@ footer {
     margin-top: 40px;
 }
 
-/* navbar */
+/* ナビバー */
 .navbar {
     /* margin-bottom: 0; */
     background: #ffffff;
@@ -17,7 +17,8 @@ footer {
 .navbar-header img {
     margin-top: 10px;
 }
-
+.navbar-right {
+}
 .navbar-right select {
 　-moz-appearance: none;
   -webkit-appearance: none;
@@ -25,12 +26,15 @@ footer {
   border-radius: 0;
   border: 0;
   margin: 0;
-  padding: 0;
+  padding: 15px;
   background: none transparent;
-  vertical-align: middle;
   font-size: inherit;
-  color: inherit;
+  color: #777;
   box-sizing: content-box;
+  cursor: pointer;
+}
+.navbar-right select:hover {
+    color: #333;
 }
 
 /* cover */
@@ -82,6 +86,11 @@ footer {
     letter-spacing: 0.15em;
     color: #fff;
 }
+.cover .cover-inner .cover-contents .prefecture-button {
+    appearance: none;
+   -webkit-appearance: none;
+   -mox-appearance: none;
+}
 
 /* 内容がナビバーに隠れてしまうので追加 */
 .content-top {
@@ -124,8 +133,8 @@ a:visited {
     color: white;
 }
 a:hover {
-    color: #a2d7dd;
-    text-decoration: none;
+    color: white;
+    /* text-decoration: none; */
 }
 
 /* おみやげ詳細・ページ */
@@ -136,9 +145,10 @@ a:hover {
     */
     border-bottom: double 5px #FFC778;
     margin-bottom: 20px;
-    font-size: 25px;
-    padding: 5px 0;
+    font-size: 22px;
+    padding-bottom: 10px;
     color: #555555;
+    
 }
 
 
@@ -156,4 +166,59 @@ a:hover {
 }
 .form-group .form-control.nobr {
     display: inline;
+}
+.form-group.prefecture-select select {
+    font-size: 15px;
+}
+
+/* 都道府県別ランキングページ */
+.wrapper.panel.panel-default {
+    overflow: hidden; 
+    position: relative; 
+    zoom:1; 
+}
+
+.panel .prefecture-ranking.left-box {
+    margin: 0;
+    float: left;
+}
+.panel .prefecture-ranking.right-box {
+    color: #555555;
+    float: left;
+    margin: 20px;
+}
+
+.panel .prefecture-ranking.right-box a {
+    color: #555555;
+    font-size: 22px;        /* ランキングの商品名 */
+    font-weight: bold;
+}
+.panel h2.omiyage-name {
+    padding-top: 0;
+    margin-top: 0;
+}
+.panel .prefecture-ranking.clear {
+    clear: both;
+}
+.panel .rank-badge {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #5cb85c;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    /* border-radius: 45px; */
+}
+.panel .supplement {
+    color: #aaaaaa;
+}
+.panel .description {
+    font-size: 15px;
+}
+/* ランキングでお土産が登録されていない場合の処理 */
+.content-top.ranking-not-registrated {
+    margin-top: 100px;
+    font-size: 17px;
 }

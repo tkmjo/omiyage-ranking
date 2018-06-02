@@ -42,6 +42,18 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('favorite', 'UserFavoriteController@store')->name('user.favorite');
         Route::delete('unfavorite', 'UserFavoriteController@destroy')->name('user.unfavorite');
         Route::get('favoriting', 'UsersController@favoriting')->name('users.favoriting');
-        Route::get('favorited', 'OmiyagesController@favorited')->name('omiyages.favorited');
+        // Route::get('favorited', 'OmiyagesController@favorited')->name('omiyages.favorited');
     });
 });
+
+// ランキング
+
+Route::get('ranking/{prefecture}', 'RankingController@rank')->name('ranking.rank');
+
+
+/*
+Route::group(['prefix' => 'ranking/{id}'], function() {
+    Route::get('rank', 'RankingController@rank')->name('ranking.rank');
+});
+*/
+

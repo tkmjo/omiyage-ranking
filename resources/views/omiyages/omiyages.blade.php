@@ -1,7 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-<h2 class="top-title">おみやげ一覧</h2>
 <div class="row">
     @foreach ($omiyages as $omiyage)
         <a href="{{ route('omiyages.show', $omiyage->id) }}">
@@ -13,7 +9,7 @@
                         </div>
                         <div class="label">
                             <span class="smoke-label"><a href="{{ route('omiyages.show', $omiyage->id) }}">{{ $omiyage->omiyage_name }}</a></span><br><br>
-                            <span class="smoke-label">{{ $omiyage->prefecture }}</span>
+                            <span class="smoke-label"><a href="{{ route('ranking.rank', $omiyage->prefecture) }}"><i class="fas fa-map-marker-alt"></i>&nbsp;{{ $omiyage->prefecture }}</a></span>
                         </div>
                     </div>
                 </div>    
@@ -21,4 +17,3 @@
         </a>
     @endforeach
 </div>
-@endsection

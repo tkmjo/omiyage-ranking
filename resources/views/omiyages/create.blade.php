@@ -4,6 +4,7 @@
 <div class="row content-top">
     <div class="col-xs-offset-1 col-xs-9">
         <h2 class="top-title">おみやげの追加</h2>
+        
         <div class="panel panel-default">
             <div class="panel-body">
                 {!! Form::open(['route' => 'omiyages.store']) !!}
@@ -27,9 +28,9 @@
                         {!! Form::number('quantity', old('quantity'), ['class' => 'form-control nobr']) !!} 個入
                     </div>
                     
-                    <div class="form-group">
-                        {!! Form::label('prefecture', '都道府県') !!}
-                        {!! Form::text('prefecture', old('prefecture'), ['class' => 'form-control']) !!}
+                    <div class="form-group prefecture-select">
+                        {!! Form::label('prefecture', '都道府県') !!}<br>
+                        {!! Form::select('prefecture', config('prefForCreate')) !!}
                     </div>
                     
                     <div class="form-group">
