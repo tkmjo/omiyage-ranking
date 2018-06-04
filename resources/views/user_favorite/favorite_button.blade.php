@@ -5,7 +5,7 @@
         {!! Form::close() !!}
     @else
         {!! Form::open(['route' => ['user.favorite', $omiyage->id]]) !!}
-            {!! Form::submit('お気に入り', ['class' => 'btn btn-primary btn-block']) !!}
+            {!! Form::submit('お気に入り', ['class' => 'btn btn-success btn-block']) !!}
         {!! Form::close() !!}
     @endif
 @endif

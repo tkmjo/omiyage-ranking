@@ -7,20 +7,23 @@
             <div class="panel-heading">会員登録</div>
             <div class="panel-body">
                 {!! Form::open(['route' => 'signup.post']) !!}
-                    <div class="form-group">
-                        {!! Form::label('氏名:') !!}
+                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                        {!! Form::label('ユーザー名') !!}
                         {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('メールアドレス:') !!}
+                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                        {!! Form::label('メールアドレス') !!}
                         {!! Form::email('email', old('email'), ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('email') }}</span>
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('パスワード:') !!}
+                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                        {!! Form::label('パスワード') !!}
                         {!! Form::password('password', ['class' => 'form-control']) !!}
+                        <span class="text-danger">{{ $errors->first('password') }}</span>
                     </div>
                     <div class="form-group">
-                        {!! Form::label('パスワード（確認）:') !!}
+                        {!! Form::label('パスワード（確認）') !!}
                         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                     </div>
                     
