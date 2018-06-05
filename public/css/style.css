@@ -111,12 +111,19 @@ footer {
 }
 
 /* おみやげwelcomeページ */
-.panel img {
+
+.panel .center-box {
+    /* text-align: center; */
+    height: 450px;
+    width: 358px;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.panel .center-box img {
     max-width: 100%;
 }
-.panel .center-box {
-    text-align: center;
-}
+
 /* 商品一覧ページ */
 .wrapper {
     position: relative;

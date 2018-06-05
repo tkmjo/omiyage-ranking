@@ -4,7 +4,10 @@
     <div class="row content-top">
         <div class="col-xs-8">
             <h2 class="top-title">{{ $omiyage->omiyage_name }}</h2>
-            <img src="https://placehold.jp/500x500.png">
+            {{-- <img src="https://placehold.jp/500x500.png"> --}}
+            @if ($omiyage->filename)
+                <img src="{{ asset('storage/image/' . $omiyage->filename) }}" alt="image" />
+            @endif
             
             <table class="table item_detail">
                 <tbody>

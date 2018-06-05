@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Omiyage extends Model
 {
-    protected $fillable = ['omiyage_name', 'shop_name', 'price', 'quantity', 'prefecture', 'description', 'url', 'user_id'];
+    protected $fillable = ['omiyage_name', 'shop_name', 'price', 'quantity', 'prefecture', 'description', 'url', 'user_id', 'filename'];
     
     public function user()
     {

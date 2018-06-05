@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Http\User;
-use app\Http\Omiyage;
+use App\Http\User;
+use App\Http\Omiyage;
 
 class OmiyagesController extends Controller
 {
@@ -46,10 +46,18 @@ class OmiyagesController extends Controller
             'prefecture' => 'required|max:191',
             'description' => 'max:191',
             'url' => 'max:191',
+            'file' => [
+                'required',
+                'file',
+            ]
         ]);
         
-        
-        $request->user()->omiyages()->create([
+        if ($request->file('file')->isValid([])) {
+            $filename = $request->file->store('public/image');
+            $omiyage = new \App\Omiyage;
+            $omiyage->find($request->id);
+            
+            $request->user()->omiyages()->create([
             'omiyage_name' => $request->omiyage_name, 
             'shop_name' => $request->shop_name, 
             'price' => $request->price, 
@@ -57,7 +65,29 @@ class OmiyagesController extends Controller
             'prefecture' => $request->prefecture,
             'description' => $request->description,
             'url' => $request->url,
-        ]);
+            'filename' => basename($filename),
+        ]); 
+        
+        /*
+            $filename = $request->file->store('public/image');
+            $omiyage = new \App\Omiyage;
+            $omiyage->find($request->id);
+            
+            $omiyage->omiyage_name = $request->omiyage_name;
+            $omiyage->shop_name = $request->shop_name;
+            $omiyage->price = $request->price;
+            $omiyage->quantity = $request->quantity;
+            $omiyage->prefecture = $request->prefecture;
+            $omiyage->description = $request->description;
+            $omiyage->url = $request->url;
+            $omiyage->filename = basename($filename);
+            $omiyage->save();
+            */
+        } else {
+            return redirect()->back()->withInput()->withErrors(['file' => '画像がアップロードされていないか不正なデータです。']);
+        }
+        
+        
         
         return redirect('/');
     }
