@@ -180,6 +180,7 @@ return [
         
         // 追加
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -233,6 +234,7 @@ return [
         
         // 追加
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

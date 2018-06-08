@@ -6,7 +6,7 @@
             <h2 class="top-title">{{ $omiyage->omiyage_name }}</h2>
             {{-- <img src="https://placehold.jp/500x500.png"> --}}
             @if ($omiyage->filename)
-                <img src="{{ asset('storage/image/' . $omiyage->filename) }}" alt="image" />
+                <img src="{{ asset('storage/image/show-resized/' . $omiyage->filename) }}" alt="image" />
             @endif
             
             <table class="table item_detail">
@@ -32,15 +32,15 @@
                     <td>{{ $omiyage->prefecture }}</td>
                 </tr>
                 <tr>
-                    <td class="data_name">商品の説明</td>
-                    <td>{{ $omiyage->description }}</td>
-                </tr>
-                <tr>
                     <td class="data_name">商品のurl</td>
                     <td>{{ $omiyage->url }}</td>
                 </tr>
                 </tbody>
             </table>
+            <div class="description_item">
+                <h3>商品の説明:</h3>
+                <td>{{ $omiyage->description }}</td>
+            </div>
             @include('user_favorite.favorite_button', ['omiyage' => $omiyage])
         </div>
     </div>

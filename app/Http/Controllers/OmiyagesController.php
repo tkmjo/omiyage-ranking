@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\User;
 use App\Http\Omiyage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class OmiyagesController extends Controller
 {
     public function index()
     {
-        $omiyages = \App\Omiyage::all();
+        // $omiyages = \App\Omiyage::all()->paginate(15);
+        $omiyages = \DB::table('omiyages')->orderby('created_at', 'desc')->paginate(15);
         $data = [
             'omiyages' => $omiyages,  
         ];
@@ -52,42 +54,46 @@ class OmiyagesController extends Controller
             ]
         ]);
         
+        $filename = null;
         if ($request->file('file')->isValid([])) {
             $filename = $request->file->store('public/image');
             $omiyage = new \App\Omiyage;
             $omiyage->find($request->id);
             
             $request->user()->omiyages()->create([
-            'omiyage_name' => $request->omiyage_name, 
-            'shop_name' => $request->shop_name, 
-            'price' => $request->price, 
-            'quantity' => $request->quantity,
-            'prefecture' => $request->prefecture,
-            'description' => $request->description,
-            'url' => $request->url,
-            'filename' => basename($filename),
-        ]); 
-        
-        /*
-            $filename = $request->file->store('public/image');
-            $omiyage = new \App\Omiyage;
-            $omiyage->find($request->id);
+                'omiyage_name' => $request->omiyage_name, 
+                'shop_name' => $request->shop_name, 
+                'price' => $request->price, 
+                'quantity' => $request->quantity,
+                'prefecture' => $request->prefecture,
+                'description' => $request->description,
+                'url' => $request->url,
+                'filename' => basename($filename),
+            ]); 
             
-            $omiyage->omiyage_name = $request->omiyage_name;
-            $omiyage->shop_name = $request->shop_name;
-            $omiyage->price = $request->price;
-            $omiyage->quantity = $request->quantity;
-            $omiyage->prefecture = $request->prefecture;
-            $omiyage->description = $request->description;
-            $omiyage->url = $request->url;
-            $omiyage->filename = basename($filename);
-            $omiyage->save();
-            */
+            /* intervention imageを使用 */
+            // お土産一覧画面・お気に入り画面・ランキング画面に使用するサイズ
+            $file = $request->file;
+            $w = 358;
+            $h = 350;
+            $resize_dir = 'welcome-resized/';
+            $this->fitting($w, $h, $resize_dir, $file, $filename, $request);
+            
+            // お土産詳細画面で使用するサイズ
+            $w = 750;
+            $h = 600;
+            $resize_dir = 'show-resized/';
+            $this->fitting($w, $h, $resize_dir, $file, $filename, $request);
+            
+            // ランキング画面で使用するサイズ
+            $w = 315;
+            $h = 250;
+            $resize_dir = 'ranking-resized/';
+            $this->fitting($w, $h, $resize_dir, $file, $filename, $request);
+            
         } else {
             return redirect()->back()->withInput()->withErrors(['file' => '画像がアップロードされていないか不正なデータです。']);
         }
-        
-        
         
         return redirect('/');
     }
@@ -101,5 +107,21 @@ class OmiyagesController extends Controller
         }
         
         return redirect()->back();
+    }
+    
+    // 画像のcropとresizeを行う(fit) 
+    public function fitting($w, $h, $resize_dir, $file, $filename, $request) {
+        list($original_w, $original_h, $type) = getimagesize($file);
+        $original_image = Image::make($request->file);
+        $resize_path = public_path('/storage/image/' . $resize_dir . basename($filename));
+        
+        if ($original_w <= $w && $original_h <= $h) {
+            $original_image->save($resize_path);
+        } else if ($original_w >= $w && $original_h >= $h) {
+            /*
+            $original_image->crop(floor(($original_h*($w / $h))), $original_h, floor(($original_w-($original_h*($w / $h))) / 2), 0)->resize($w, $h)->save($resize_path);
+            */
+            $original_image->fit($w, $h)->save($resize_path);
+        }
     }
 }

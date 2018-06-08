@@ -27,8 +27,8 @@
                         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                     </div>
                     
-                    <div class="text-right">
-                        {!! Form::submit('登録', ['class' => 'btn btn-success']) !!}
+                    <div class="text-center">
+                        {!! Form::submit('登録', ['class' => 'btn btn-success contribution_success']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>

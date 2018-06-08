@@ -19,8 +19,8 @@
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     </div>
                     
-                    <div class="text-right">
-                        {!! Form::submit('ログイン', ['class' => 'btn btn-success']) !!}
+                    <div class="text-center">
+                        {!! Form::submit('ログイン', ['class' => 'btn btn-success contribution_success']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>

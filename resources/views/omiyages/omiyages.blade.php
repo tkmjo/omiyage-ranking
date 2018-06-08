@@ -8,7 +8,9 @@
                             {{--
                             <img src="https://placehold.jp/358x450.png">
                             --}}
-                            <img src="{{ asset('storage/image/' . $omiyage->filename) }}" alt="image" />
+                            
+                            <img src="{{ asset('storage/image/welcome-resized/' . $omiyage->filename) }}" alt="image" />
+                            
                         </div>
                         <div class="label">
                             <span class="smoke-label"><a href="{{ route('omiyages.show', $omiyage->id) }}">{{ $omiyage->omiyage_name }}</a></span><br><br>

@@ -11,7 +11,7 @@ class UsersController extends Controller
     public function favoriting($id)
     {
         $user = User::find($id);
-        $omiyages = $user->favoriting()->paginate(10);
+        $omiyages = $user->favoriting()->orderby('created_at', 'desc')->paginate(15);
         
         $data = [
             'user' => $user,

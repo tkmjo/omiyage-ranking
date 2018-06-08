@@ -12,6 +12,7 @@ footer {
 .navbar {
     /* margin-bottom: 0; */
     background: #ffffff;
+    border-bottom: 1px solid #dddddd;
 }
 
 .navbar-header img {
@@ -26,16 +27,34 @@ footer {
   border-radius: 0;
   border: 0;
   margin: 0;
-  padding: 15px;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   background: none transparent;
   font-size: inherit;
   color: #777;
   box-sizing: content-box;
   cursor: pointer;
+  border-left: 1px solid #eee;
+}
+.navbar-right select:last-child {
+    border-right: 1px solid #eee;
 }
 .navbar-right select:hover {
-    color: #333;
+    color: #111;
+    background-color: #f2f2f2;
 }
+.navbar-default .navbar-nav>li>a {
+    border-right: 1px solid #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    background-color: #f2f2f2;
+}
+
 
 /* バリデーションエラー */
 
@@ -103,6 +122,9 @@ footer {
     appearance: none;
    -webkit-appearance: none;
    -mox-appearance: none;
+   background-color: rgba(254, 200, 100, 0.8);
+   border-color: rgba(254, 200, 100, 0.8);
+   border-radius: 0;
 }
 
 /* 内容がナビバーに隠れてしまうので追加 */
@@ -111,14 +133,23 @@ footer {
 }
 
 /* おみやげwelcomeページ */
+.top-title.welcome {
+    margin-top: 70px;
+}
 
+/* omiyages.bladeページ */
+.wrapper.panel {
+    border-radius: 0;
+    border: none;
+}
 .panel .center-box {
     /* text-align: center; */
-    height: 450px;
-    width: 358px;
+    height: 350px;
+    width: 360px;
     display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #f5f5f5;
 }
 .panel .center-box img {
     max-width: 100%;
@@ -129,7 +160,7 @@ footer {
     position: relative;
 }
 .label {
-    width: 100%;
+    width: 99.5%;
     position: absolute;
     bottom: 0px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -139,6 +170,7 @@ footer {
     font-size: 20px;
     text-align: left;
     line-height: 1.4;
+    border-radius: 0;
     
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -146,6 +178,7 @@ footer {
     -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 a:link {
     color: white;
 }
@@ -157,13 +190,13 @@ a:hover {
     /* text-decoration: none; */
 }
 
-/* おみやげ詳細・ページ */
+/* 見出し */
 .top-title {
     /*
     margin-bottom: 20px;
     background-color: #d6c6af;
     */
-    border-bottom: double 5px #FFC778;
+    border-bottom: solid 1px #dddddd;
     margin-bottom: 20px;
     font-size: 22px;
     padding-bottom: 10px;
@@ -177,10 +210,21 @@ a:hover {
     margin-top: 30px;
 }
 .data_name{
+    width: 30%;
     background-color: #f1f1f1;
+}
+.description_item {
+    margin-top: 30px;
+}
+.description_item h3 {
+    font-size: 15px;
 }
 
 /* 商品情報入力フォーム */
+.form-group {
+    margin-top: 25px;
+}
+
 .form-group.num {
     width: 120px;
 }
@@ -190,18 +234,36 @@ a:hover {
 .form-group.prefecture-select select {
     font-size: 15px;
 }
+.form-group .required:after {
+    content: '必須';
+    background-color: #ff4444;
+    color: white;
+    font-weight: normal;
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin-left: 5px;
+    font-size: 12px;
+}
 
 /* 都道府県別ランキングページ */
 .wrapper.panel.panel-default {
     overflow: hidden; 
     position: relative; 
     zoom:1; 
+    box-shadow: 0 0 5px #eeeeee;
 }
 
 .panel .prefecture-ranking.left-box {
     margin: 0;
     float: left;
+    width: 315px;
+    height: 250px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .panel .prefecture-ranking.right-box {
     color: #555555;
     float: left;
@@ -224,13 +286,26 @@ a:hover {
     position: absolute;
     top: 0px;
     left: 0px;
-    background-color: #5cb85c;
+    background-color: rgba(254, 200, 100, 0.8);
     width: 45px;
     height: 45px;
     text-align: center;
     line-height: 45px;
-    /* border-radius: 45px; */
 }
+/*
+.panel .rank-badge:second-child {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(254, 200, 100, 0.8);
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+}
+*/
+
+
 .panel .supplement {
     color: #aaaaaa;
 }
@@ -241,4 +316,12 @@ a:hover {
 .content-top.ranking-not-registrated {
     margin-top: 100px;
     font-size: 17px;
+}
+
+/* 投稿, ログイン, お気に入りボタン*/
+.text-center .btn.btn-success.contribution_success {
+    margin-top: 30px;
+}
+.text-center .btn.btn-danger.contribution_danger {
+    margin-top: 30px;
 }

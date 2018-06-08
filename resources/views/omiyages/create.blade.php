@@ -10,23 +10,15 @@
                 {!! Form::open(['route' => 'omiyages.store', 'method' => 'post', 'files' => true]) !!}
                 
                 {{-- エラーメッセージ --}}
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                
                     <div class="form-group {{ $errors->has('omiyage_name') ? 'has-error' : '' }}">
-                        {!! Form::label('omiyage_name', '商品名') !!}
+                        {!! Form::label('omiyage_name', '商品名', ['class' => 'required']) !!}
                         {!! Form::text('omiyage_name', old('omiyage_name'), ['class' => 'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('omiyage_name') }}</span>
                     </div>
                     
                     <div class="form-group {{ $errors->has('shop_name') ? 'has-error' : '' }}">
-                        {!! Form::label('shop_name', '購入店舗') !!}
+                        {!! Form::label('shop_name', '購入店舗', ['class' => 'required']) !!}
                         {!! Form::text('shop_name', old('shop_name'), ['class' => 'form-control']) !!}
                         <span class="text-danger">{{ $errors->first('shop_name') }}</span>
                     </div>
@@ -44,7 +36,7 @@
                     </div>
                     
                     <div class="form-group prefecture-select">
-                        {!! Form::label('prefecture', '都道府県') !!}<br>
+                        {!! Form::label('prefecture', '都道府県', ['class' => 'required']) !!}<br>
                         {!! Form::select('prefecture', config('prefForCreate')) !!}<br>
                         <span class="text-danger">{{ $errors->first('prefecture') }}</span>
                     </div>
@@ -60,12 +52,12 @@
                     </div>
                     
                     <div class="form-group">
-                        {!! Form::label('file', '画像アップロード', ['class' => 'control-label']) !!}
+                        {!! Form::label('file', '画像アップロード', ['class' => 'control-label required']) !!}
                         {!! Form::file('file') !!}
                     </div>
                     
-                    <div class="text-right">
-                        {!! Form::submit('投稿', ['class' => 'btn btn-success']) !!}
+                    <div class="text-center">
+                        {!! Form::submit('投稿', ['class' => 'btn btn-success contribution_success']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>

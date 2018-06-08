@@ -4,7 +4,7 @@
     <div class="cover">
         <div class="cover-inner">
             <div class="cover-contents">
-                <h1>地域ごとの人気のおみやげが知りたい</h1>
+                <h1>全国の人気のおみやげが知りたい</h1>
                     <select class="btn btn-success btn-lg prefecture-button" onchange="top.location.href=value">
                         <option value="">ランキングを見る</option>
                         @foreach(config('pref') as $index => $name)
@@ -20,6 +20,9 @@
 @endsection
 
 @section('content')
-    <h2 class="top-title">おみやげ一覧</h2>
+    <h2 class="top-title welcome">おみやげ一覧</h2>
     @include('omiyages.omiyages')
+    <div class="text-center">
+        {!! $omiyages->render() !!}
+    </div>
 @endsection
