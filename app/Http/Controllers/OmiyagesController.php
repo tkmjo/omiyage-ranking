@@ -30,7 +30,12 @@ class OmiyagesController extends Controller
     public function show($id)
     {
         $omiyage = \App\Omiyage::find($id);
+        if ($omiyage->description == null) {
+            $omiyage->description = '記入されておりません。';
+        }
         
+        $omiyage->description = preg_replace("/\n|\r\n|\r/", "<br />", $omiyage->description);
+
         $data = [
             'omiyage' => $omiyage,  
         ];
@@ -43,14 +48,15 @@ class OmiyagesController extends Controller
         $this->validate($request, [
             'omiyage_name' => 'required|max:191', 
             'shop_name' => 'required|max:191', 
-            'price' => 'numeric', 
-            'quantity' => 'numeric',
+            'price' => 'numeric|nullable', 
+            'quantity' => 'numeric|nullable',
             'prefecture' => 'required|max:191',
-            'description' => 'max:191',
+            // 'description' => 'max:191',
             'url' => 'max:191',
             'file' => [
                 'required',
                 'file',
+                'max:5120',
             ]
         ]);
         
@@ -74,7 +80,7 @@ class OmiyagesController extends Controller
             /* intervention imageを使用 */
             // お土産一覧画面・お気に入り画面・ランキング画面に使用するサイズ
             $file = $request->file;
-            $w = 358;
+            $w = 360;
             $h = 350;
             $resize_dir = 'welcome-resized/';
             $this->fitting($w, $h, $resize_dir, $file, $filename, $request);

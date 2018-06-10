@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="row content-top">
-        <div class="col-xs-8">
+        <div class="col-md-8 col-sm-12 col-xs-12">
             <h2 class="top-title">{{ $omiyage->omiyage_name }}</h2>
-            {{-- <img src="https://placehold.jp/500x500.png"> --}}
             @if ($omiyage->filename)
-                <img src="{{ asset('storage/image/show-resized/' . $omiyage->filename) }}" alt="image" />
+                <img class="show_image" src="{{ asset('storage/image/show-resized/' . $omiyage->filename) }}" alt="image" />
             @endif
             
             <table class="table item_detail">
@@ -39,7 +38,7 @@
             </table>
             <div class="description_item">
                 <h3>商品の説明:</h3>
-                <td>{{ $omiyage->description }}</td>
+                <p>{!! $omiyage->description !!}</p>
             </div>
             @include('user_favorite.favorite_button', ['omiyage' => $omiyage])
         </div>

@@ -11,11 +11,13 @@ footer {
 /* ナビバー */
 .navbar {
     /* margin-bottom: 0; */
-    background: #ffffff;
+    background-color: rgba(255, 255, 255, 0.97);
     border-bottom: 1px solid #dddddd;
+    
 }
 
 .navbar-header img {
+    max-width: 100%;
     margin-top: 10px;
 }
 .navbar-right {
@@ -152,6 +154,7 @@ footer {
 	background-color: #f5f5f5;
 }
 .panel .center-box img {
+    text-align: center;
     max-width: 100%;
 }
 
@@ -160,7 +163,7 @@ footer {
     position: relative;
 }
 .label {
-    width: 99.5%;
+    width: 100%;
     position: absolute;
     bottom: 0px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -219,6 +222,10 @@ a:hover {
 .description_item h3 {
     font-size: 15px;
 }
+.show_image {
+    max-width: 100%;
+    max-height: 100%;
+}
 
 /* 商品情報入力フォーム */
 .form-group {
@@ -252,12 +259,19 @@ a:hover {
     zoom:1; 
     box-shadow: 0 0 5px #eeeeee;
 }
+.wrapper.panel.panel-default.panel-ranking {
+    height: 250px;
+}
 
 .panel .prefecture-ranking.left-box {
     margin: 0;
     float: left;
-    width: 315px;
-    height: 250px;
+    width: 315px; 
+    height: 250px; 
+    /*
+    max-width: 37.17%;
+    height: 100%;
+    */
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
@@ -268,6 +282,12 @@ a:hover {
     color: #555555;
     float: left;
     margin: 20px;
+    /*
+    width: 490px;
+    height: 250px;
+    */
+    max-width: 57.81%;
+    height: 100%;
 }
 
 .panel .prefecture-ranking.right-box a {
@@ -311,6 +331,10 @@ a:hover {
 }
 .panel .description {
     font-size: 15px;
+    margin-bottom: 30px;
+}
+.panel .price_quantity {
+    margin-bottom: 10px;
 }
 /* ランキングでお土産が登録されていない場合の処理 */
 .content-top.ranking-not-registrated {

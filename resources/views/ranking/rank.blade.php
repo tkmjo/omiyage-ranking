@@ -14,19 +14,29 @@
             <a href="{{ route('omiyages.show', $omiyage->id) }}">
                 <div class="omiyage">
                     <div class="col-md-9 col-sm-12 col-xs-12">
-                        <div class="wrapper panel panel-default">
+                        <div class="wrapper panel panel-default panel-ranking">
                             <div class="prefecture-ranking left-box">
                                 <img src="{{ asset('storage/image/ranking-resized/' . $omiyage->filename) }}" alt="image">
-                                
                             </div>
                             <div class="rank-badge"><?php echo $rank_num ?></div>
+                            
                             <div class="prefecture-ranking right-box">
                                 <h2 class="omiyage-name"><a href="{{ route('omiyages.show', $omiyage->id) }}">{{ $omiyage->omiyage_name }}</a></h2>
-                                <i class="fas fa-map-marker-alt supplement"></i>&nbsp;<span class="supplement">{{ $omiyage->prefecture }}</span>&emsp;&emsp;&emsp;
-                                <span class="supplement">{{ $omiyage->quantity }} 個入 / </span>
-                                <span class="supplement">{{ $omiyage->price }} 円</span><br><br>
+                                <div class="price_quantity">
+                                    <i class="fas fa-map-marker-alt supplement"></i>&nbsp;<span class="supplement">{{ $omiyage->prefecture }}</span>&emsp;&emsp;&emsp;
+                                    <span class="supplement">{{ $omiyage->price }} 円 / </span>
+                                    <span class="supplement">{{ $omiyage->quantity }} 個入</span>
+                                </div>
+                                
+                                <?php
+                                    // 表示文字数制限処理
+                                    if (strlen($omiyage->description) >= 120) {
+                                        $omiyage->description = mb_substr($omiyage->description, 0, 120) . '...';
+                                    }
+                                ?>
+                                
                                 <p class="description">{{ $omiyage->description }}</p>
-                                <span class="favorite">{{ $omiyage->count }}人がお気に入りに登録</span>
+                                <div class="favorite">{{ $omiyage->count }}人がお気に入りに登録</div>
                             </div>
                         </div>
                     </div>    

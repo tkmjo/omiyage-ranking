@@ -10,6 +10,15 @@
                 {!! Form::open(['route' => 'omiyages.store', 'method' => 'post', 'files' => true]) !!}
                 
                 {{-- エラーメッセージ --}}
+                {{--
+                @if (count($errors) > 0)
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                --}}
                 
                     <div class="form-group {{ $errors->has('omiyage_name') ? 'has-error' : '' }}">
                         {!! Form::label('omiyage_name', '商品名', ['class' => 'required']) !!}
@@ -43,7 +52,7 @@
                     
                     <div class="form-group">
                         {!! Form::label('description', '説明') !!}
-                        {!! Form::text('description', old('description'), ['class' => 'form-control']) !!}
+                        {!! Form::textarea('description', old('description'), ['class' => 'form-control']) !!}
                     </div>
                     
                     <div class="form-group">
@@ -54,6 +63,7 @@
                     <div class="form-group">
                         {!! Form::label('file', '画像アップロード', ['class' => 'control-label required']) !!}
                         {!! Form::file('file') !!}
+                        <span class="text-danger">{{ $errors->first('file') }}</span>
                     </div>
                     
                     <div class="text-center">
