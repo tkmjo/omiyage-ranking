@@ -152,6 +152,7 @@ footer {
 	align-items: center;
 	justify-content: center;
 	background-color: #f5f5f5;
+	margin: 0 auto;
 }
 .panel .center-box img {
     text-align: center;
@@ -191,6 +192,9 @@ a:visited {
 a:hover {
     color: white;
     /* text-decoration: none; */
+}
+.omiyage.image-wrapper {
+    text-align: center;
 }
 
 /* 見出し */
@@ -257,10 +261,11 @@ a:hover {
     overflow: hidden; 
     position: relative; 
     zoom:1; 
-    box-shadow: 0 0 5px #eeeeee;
+    box-shadow: 0 0 5px #dddddd;
 }
 .wrapper.panel.panel-default.panel-ranking {
     height: 250px;
+    width: 847.5px;
 }
 
 .panel .prefecture-ranking.left-box {
@@ -324,7 +329,9 @@ a:hover {
     line-height: 45px;
 }
 */
-
+.content-top.top-title.ranking-top {
+    width: 847.5px;
+}
 
 .panel .supplement {
     color: #aaaaaa;

@@ -2,7 +2,7 @@
 
 @section('content')
     @if (count($omiyages) > 0)
-    <h2 class="content-top top-title">{{ $omiyages->first()->prefecture }}の人気おみやげランキング</h2>
+    <h2 class="content-top top-title ranking-top">{{ $omiyages->first()->prefecture }}の人気おみやげランキング</h2>
     <div class="row">
         <?php $rank_num = 0 ?>
         @foreach ($omiyages as $omiyage)
