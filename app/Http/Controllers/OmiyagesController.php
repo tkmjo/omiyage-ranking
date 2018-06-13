@@ -7,6 +7,8 @@ use App\Http\User;
 use App\Http\Omiyage;
 use Intervention\Image\ImageManagerStatic as Image;
 
+use Storage;
+
 class OmiyagesController extends Controller
 {
     public function index()
@@ -45,13 +47,13 @@ class OmiyagesController extends Controller
     
     public function store(Request $request)
     {
+        // バリデーション
         $this->validate($request, [
             'omiyage_name' => 'required|max:191', 
             'shop_name' => 'required|max:191', 
             'price' => 'numeric|nullable', 
             'quantity' => 'numeric|nullable',
             'prefecture' => 'required|max:191',
-            // 'description' => 'max:191',
             'url' => 'max:191',
             'file' => [
                 'required',
@@ -60,11 +62,16 @@ class OmiyagesController extends Controller
             ]
         ]);
         
+        
         $filename = null;
         if ($request->file('file')->isValid([])) {
-            $filename = $request->file->store('public/image');
-            $omiyage = new \App\Omiyage;
-            $omiyage->find($request->id);
+            // $filename = $request->file->store('public/image');
+            // $omiyage = new \App\Omiyage;
+            // $omiyage->find($request->id);
+            
+            // $filename = $request->file->getClientOriginalName();
+            $ext = $request->file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
             
             $request->user()->omiyages()->create([
                 'omiyage_name' => $request->omiyage_name, 
@@ -77,7 +84,7 @@ class OmiyagesController extends Controller
                 'filename' => basename($filename),
             ]); 
             
-            /* intervention imageを使用 */
+            
             // お土産一覧画面・お気に入り画面・ランキング画面に使用するサイズ
             $file = $request->file;
             $w = 360;
@@ -116,6 +123,8 @@ class OmiyagesController extends Controller
     }
     
     // 画像のcropとresizeを行う(fit) 
+    // intervention imageを使用
+    /*
     public function fitting($w, $h, $resize_dir, $file, $filename, $request) {
         list($original_w, $original_h, $type) = getimagesize($file);
         $original_image = Image::make($request->file);
@@ -124,10 +133,32 @@ class OmiyagesController extends Controller
         if ($original_w <= $w && $original_h <= $h) {
             $original_image->save($resize_path);
         } else if ($original_w >= $w && $original_h >= $h) {
-            /*
-            $original_image->crop(floor(($original_h*($w / $h))), $original_h, floor(($original_w-($original_h*($w / $h))) / 2), 0)->resize($w, $h)->save($resize_path);
-            */
+            
+            // $original_image->crop(floor(($original_h*($w / $h))), $original_h, floor(($original_w-($original_h*($w / $h))) / 2), 0)->resize($w, $h)->save($resize_path);
+            
             $original_image->fit($w, $h)->save($resize_path);
+        }
+    }
+    */
+    
+    // s3を使用
+    public function fitting($w, $h, $resize_dir, $file, $filename, $request) {
+        list($original_w, $original_h, $type) = getimagesize($file);
+        $original_image = Image::make($request->file);
+        $resize_path = public_path('/storage/image/' . $resize_dir . basename($filename));
+        
+        if ($original_w <= $w && $original_h <= $h) {
+            $original_image->save($resize_path);
+            $contents = Storage::get('public/image/' . $resize_dir . $filename);
+            Storage::disk('s3')->put($resize_path, $contents, 'public');
+            
+        } else if ($original_w >= $w && $original_h >= $h) {
+            
+            // $original_image->crop(floor(($original_h*($w / $h))), $original_h, floor(($original_w-($original_h*($w / $h))) / 2), 0)->resize($w, $h)->save($resize_path);
+            
+            $original_image->fit($w, $h)->save($resize_path);
+            $contents = Storage::get('public/image/' . $resize_dir . $filename);
+            Storage::disk('s3')->put($resize_path, $contents, 'public');
         }
     }
 }

@@ -5,7 +5,7 @@
         <div class="col-md-8 col-sm-12 col-xs-12">
             <h2 class="top-title">{{ $omiyage->omiyage_name }}</h2>
             @if ($omiyage->filename)
-                <img class="show_image" src="{{ asset('storage/image/show-resized/' . $omiyage->filename) }}" alt="image" />
+                <img src="{{ Storage::disk('s3')->url('home/ec2-user/environment/omiyage-ranking/public/storage/image/show-resized/' . $omiyage->filename) }}" />
             @endif
             
             <table class="table item_detail">
