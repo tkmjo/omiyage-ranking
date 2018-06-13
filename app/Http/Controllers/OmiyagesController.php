@@ -8,6 +8,7 @@ use App\Http\Omiyage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 use Storage;
+use File;
 
 class OmiyagesController extends Controller
 {
@@ -65,11 +66,6 @@ class OmiyagesController extends Controller
         
         $filename = null;
         if ($request->file('file')->isValid([])) {
-            // $filename = $request->file->store('public/image');
-            // $omiyage = new \App\Omiyage;
-            // $omiyage->find($request->id);
-            
-            // $filename = $request->file->getClientOriginalName();
             $ext = $request->file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
             
@@ -89,20 +85,20 @@ class OmiyagesController extends Controller
             $file = $request->file;
             $w = 360;
             $h = 350;
-            $resize_dir = 'welcome-resized/';
-            $this->fitting($w, $h, $resize_dir, $file, $filename, $request);
+            $resize_path = 'welcome-resized/';
+            $this->fitting($w, $h, $resize_path, $file, $filename, $request);
             
             // お土産詳細画面で使用するサイズ
             $w = 750;
             $h = 600;
-            $resize_dir = 'show-resized/';
-            $this->fitting($w, $h, $resize_dir, $file, $filename, $request);
+            $resize_path = 'show-resized/';
+            $this->fitting($w, $h, $resize_path, $file, $filename, $request);
             
             // ランキング画面で使用するサイズ
             $w = 315;
             $h = 250;
-            $resize_dir = 'ranking-resized/';
-            $this->fitting($w, $h, $resize_dir, $file, $filename, $request);
+            $resize_path = 'ranking-resized/';
+            $this->fitting($w, $h, $resize_path, $file, $filename, $request);
             
         } else {
             return redirect()->back()->withInput()->withErrors(['file' => '画像がアップロードされていないか不正なデータです。']);
@@ -122,43 +118,22 @@ class OmiyagesController extends Controller
         return redirect()->back();
     }
     
-    // 画像のcropとresizeを行う(fit) 
-    // intervention imageを使用
-    /*
-    public function fitting($w, $h, $resize_dir, $file, $filename, $request) {
+    public function fitting($w, $h, $resize_path, $file, $filename, $request) {
         list($original_w, $original_h, $type) = getimagesize($file);
         $original_image = Image::make($request->file);
-        $resize_path = public_path('/storage/image/' . $resize_dir . basename($filename));
+        $path = 'storage/image/';
+        $full_path = public_path($path . $resize_path . $filename);
         
         if ($original_w <= $w && $original_h <= $h) {
-            $original_image->save($resize_path);
-        } else if ($original_w >= $w && $original_h >= $h) {
-            
-            // $original_image->crop(floor(($original_h*($w / $h))), $original_h, floor(($original_w-($original_h*($w / $h))) / 2), 0)->resize($w, $h)->save($resize_path);
-            
-            $original_image->fit($w, $h)->save($resize_path);
-        }
-    }
-    */
-    
-    // s3を使用
-    public function fitting($w, $h, $resize_dir, $file, $filename, $request) {
-        list($original_w, $original_h, $type) = getimagesize($file);
-        $original_image = Image::make($request->file);
-        $resize_path = public_path('/storage/image/' . $resize_dir . basename($filename));
-        
-        if ($original_w <= $w && $original_h <= $h) {
-            $original_image->save($resize_path);
-            $contents = Storage::get('public/image/' . $resize_dir . $filename);
-            Storage::disk('s3')->put($resize_path, $contents, 'public');
+            // ディレクトリが作られていない場合、作成
+            $contents = $original_image->stream();
+            Storage::disk('s3')->put($full_path, $contents->__toString(), 'public');
             
         } else if ($original_w >= $w && $original_h >= $h) {
-            
-            // $original_image->crop(floor(($original_h*($w / $h))), $original_h, floor(($original_w-($original_h*($w / $h))) / 2), 0)->resize($w, $h)->save($resize_path);
-            
-            $original_image->fit($w, $h)->save($resize_path);
-            $contents = Storage::get('public/image/' . $resize_dir . $filename);
-            Storage::disk('s3')->put($resize_path, $contents, 'public');
+            // ディレクトリが作られていない場合、作成
+            $original_image->fit($w, $h);
+            $contents = $original_image->stream();
+            Storage::disk('s3')->put($full_path, $contents->__toString(), 'public');
         }
     }
 }

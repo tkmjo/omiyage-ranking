@@ -11,16 +11,6 @@
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
-
-/*
-Route::get('/', 'WelcomeController@index');
-*/
-
 Route::get('/', 'OmiyagesController@index');
 
 // ユーザ登録
@@ -49,11 +39,4 @@ Route::group(['middleware' => 'auth'], function() {
 // ランキング
 
 Route::get('ranking/{prefecture}', 'RankingController@rank')->name('ranking.rank');
-
-
-/*
-Route::group(['prefix' => 'ranking/{id}'], function() {
-    Route::get('rank', 'RankingController@rank')->name('ranking.rank');
-});
-*/
 

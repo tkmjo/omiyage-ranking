@@ -9,6 +9,6 @@ class WelcomeController extends Controller
     public function index()
     {
         $prefs = config('pref');
-        return view('welcome');         /*->with('img', $img);*/
+        return view('welcome');         
     }
 }

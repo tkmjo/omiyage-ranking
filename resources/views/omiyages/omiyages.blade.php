@@ -5,11 +5,8 @@
                 <div class="col-md-4 col-sm-6 col-xs-12 image-wrapper">
                     <div class="wrapper panel panel-default">
                         <div class="center-box">
-                            {{--
-                            <img src="{{ asset('storage/image/welcome-resized/' . $omiyage->filename) }}" alt="image" />
-                            --}}
 
-                            <img src="{{ Storage::disk('s3')->url('home/ec2-user/environment/omiyage-ranking/public/storage/image/welcome-resized/' . $omiyage->filename) }}" />
+                            <img src="{{ Storage::disk('s3')->url('app/public/storage/image/welcome-resized/' . $omiyage->filename) }}" />
                             
                         </div>
                         <div class="label col-md-4 col-sm-6 col-xs-12">

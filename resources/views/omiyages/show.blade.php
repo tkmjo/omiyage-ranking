@@ -5,7 +5,7 @@
         <div class="col-md-8 col-sm-12 col-xs-12">
             <h2 class="top-title">{{ $omiyage->omiyage_name }}</h2>
             @if ($omiyage->filename)
-                <img src="{{ Storage::disk('s3')->url('home/ec2-user/environment/omiyage-ranking/public/storage/image/show-resized/' . $omiyage->filename) }}" />
+                <img src="{{ Storage::disk('s3')->url('app/public/storage/image/welcome-resized/' . $omiyage->filename) }}" />
             @endif
             
             <table class="table item_detail">
@@ -20,11 +20,19 @@
                 </tr>
                 <tr>
                     <td class="data_name">価格</td>
-                    <td>{{ $omiyage->price }} 円</td>
+                    @if (is_null($omiyage->quantity))
+                        <td>  -</td>
+                    @else
+                        <td>{{ $omiyage->price }} 円</td>
+                    @endif
                 </tr>
                 <tr>
                     <td class="data_name">個数</td>
-                    <td>{{ $omiyage->quantity }} 個入</td>
+                    @if (is_null($omiyage->quantity))
+                        <td>  -</td>
+                    @else
+                        <td>{{ $omiyage->quantity }} 個入</td>
+                    @endif
                 </tr>
                 <tr>
                     <td class="data_name">都道府県</td>
@@ -32,7 +40,11 @@
                 </tr>
                 <tr>
                     <td class="data_name">商品のurl</td>
-                    <td>{{ $omiyage->url }}</td>
+                    @if (is_null($omiyage->url))
+                        <td>  -</td>
+                    @else
+                        <td><a href="{{ url($omiyage->url) }}" class="item_url">{{ $omiyage->url }}</a></td>
+                    @endif
                 </tr>
                 </tbody>
             </table>

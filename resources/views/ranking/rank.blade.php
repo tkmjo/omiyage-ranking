@@ -16,7 +16,7 @@
                     <div class="col-md-9 col-sm-12 col-xs-12">
                         <div class="wrapper panel panel-default panel-ranking">
                             <div class="prefecture-ranking left-box">
-                                <img src="{{ Storage::disk('s3')->url('home/ec2-user/environment/omiyage-ranking/public/storage/image/ranking-resized/' . $omiyage->filename) }}" />
+                                <img src="{{ Storage::disk('s3')->url('app/public/storage/image/ranking-resized/' . $omiyage->filename) }}" />
                             </div>
                             <div class="rank-badge"><?php echo $rank_num ?></div>
                             
@@ -47,8 +47,4 @@
     @else
         <p class="content-top ranking-not-registrated">おみやげが登録されておりません。</p>
     @endif
-    
-    {{--
-    @include('omiyages.omiyages', ['omiyages' => $omiyages])
-    --}}
 @endsection
