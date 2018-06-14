@@ -5,7 +5,7 @@
         <div class="col-md-8 col-sm-12 col-xs-12">
             <h2 class="top-title">{{ $omiyage->omiyage_name }}</h2>
             @if ($omiyage->filename)
-                <img src="{{ Storage::disk('s3')->url('app/public/storage/image/welcome-resized/' . $omiyage->filename) }}" />
+                <img src="{{ Storage::disk('s3')->url('app/public/storage/image/show-resized/' . $omiyage->filename) }}" />
             @endif
             
             <table class="table item_detail">
